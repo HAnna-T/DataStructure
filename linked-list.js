@@ -1,7 +1,7 @@
 export class LinkedList {
   constructor() {
-    this.head = null;
-    this.tail = null;
+    this.head = null; // First element of the list
+    this.tail = null; // Last element of the list
   }
   append(value) {
     const newNode = { value: value, next: null };
@@ -59,26 +59,31 @@ export class LinkedList {
       this.tail = curNode;
     }
   }
+
   deleteHead() {
     if (!this.head) {
       return null;
     }
+
     const deletedItem = this.head;
-    if (this.head.nex) {
+
+    if (this.head.next) {
       this.head = this.head.next;
     } else {
       this.head = null;
       this.tail = null;
     }
+
     return deletedItem;
   }
+
   toArray() {
-    const element = [];
+    const elements = [];
     let curNode = this.head;
     while (curNode) {
-      element.push(curNode);
+      elements.push(curNode);
       curNode = curNode.next;
     }
-    return element;
+    return elements;
   }
 }
