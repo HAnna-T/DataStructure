@@ -50,15 +50,27 @@ class Node {
       existingChildNode.removeNode(segments.slice(1).join("/"));
     }
   }
-  find(value){
+  find(value) {
     //depth  first
-    for(const children of this.children){
-      if(child.value ===value){
+    // for(const children of this.children){
+    //   if(child.value ===value){
+    //     return child;
+    //   }
+    //   const nestedChildNode = child.find(value)
+    //   if(nestedChildNode){
+    //     return nestedChildNode
+    //   }
+    // }
+    //Breadth-first
+    for (const children of this.children) {
+      if (child.value === value) {
         return child;
       }
-      const nestedChildNode = child.find(value)
-      if(nestedChildNode){
-        return nestedChildNode
+    }
+    for (const children of this.children) {
+      const nestedChildNode = child.find(value);
+      if (nestedChildNode) {
+        return nestedChildNode;
       }
     }
   }
@@ -76,12 +88,11 @@ class Tree {
   remove(path) {
     this.root.removeNode(path);
   }
-  find(value){
-    if(this.root.value===value){
-      return this.root
+  find(value) {
+    if (this.root.value === value) {
+      return this.root;
     }
-    return this.root.find(value)
-
+    return this.root.find(value);
   }
 }
 const filesystem = new Tree("/");
