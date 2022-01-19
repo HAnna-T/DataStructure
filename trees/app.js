@@ -50,6 +50,18 @@ class Node {
       existingChildNode.removeNode(segments.slice(1).join("/"));
     }
   }
+  find(value){
+    //depth  first
+    for(const children of this.children){
+      if(child.value ===value){
+        return child;
+      }
+      const nestedChildNode = child.find(value)
+      if(nestedChildNode){
+        return nestedChildNode
+      }
+    }
+  }
 }
 
 class Tree {
@@ -63,6 +75,13 @@ class Tree {
 
   remove(path) {
     this.root.removeNode(path);
+  }
+  find(value){
+    if(this.root.value===value){
+      return this.root
+    }
+    return this.root.find(value)
+
   }
 }
 const filesystem = new Tree("/");
