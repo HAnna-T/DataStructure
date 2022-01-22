@@ -53,6 +53,14 @@ class Node {
     if (!identifiedNode.left && !identifiedNode.right) {
       const identifiedParent = identifiedNode.parent;
       identifiedParent.removeChild(identifiedNode);
+      return;
+    }
+    if (identifiedNode.left && identifiedNode.right) {
+    } else {
+      const childNode = identifiedNode.left || identifiedNode.right;
+      identifiedNode.left = childNode.left;
+      identifiedNode.right = childNode.right;
+      identifiedNode.value = childNode.value;
     }
   }
   removeChild(node) {
