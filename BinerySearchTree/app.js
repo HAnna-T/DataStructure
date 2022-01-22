@@ -3,6 +3,7 @@ class Node {
     this.value = value;
     this.left = null;
     this.right = null;
+    this.parent = null;
   }
 
   add(value) {
@@ -17,6 +18,7 @@ class Node {
         return;
       }
       const newNode = new Node(value);
+      newNode.parent = this;
       this.right = newNode;
       return;
     }
@@ -26,6 +28,7 @@ class Node {
         return;
       }
       const newNode = new Node(value);
+      newNode.parent = this;
       this.left = newNode;
       return;
     }
@@ -40,6 +43,26 @@ class Node {
 
     if (this.value > value && this.left) {
       return this.left.find(value);
+    }
+  }
+  remove(value) {
+    const identifiedNode = this.find(value);
+    if (!identifiedNode) {
+      throw new Error("Could not find node with that value");
+    }
+    if (!identifiedNode.left && !identifiedNode.right) {
+      const identifiedParent = identifiedNode.parent;
+      identifiedParent.removeChild(identifiedNode);
+    }
+  }
+  removeChild(node) {
+    if (this.left && this.left === node) {
+      this.left = null;
+      return;
+    }
+    if (this.right && this.right === node) {
+      this.right = null;
+      return;
     }
   }
 }
